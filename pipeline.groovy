@@ -40,7 +40,6 @@ pipeline {
                 sh "npm install"
                 sh "pwd"
                 sh "npm run build"
-                
                 sh "tar -rf dist.tar dist/"
                 archiveArtifacts artifacts: 'dist.tar',onlyIfSuccessful:true
             }
