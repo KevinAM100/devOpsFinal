@@ -1,34 +1,34 @@
 def url_repo = "https://github.com/andresmerida/academic-management.git"
-pipeline{
-    agent{
+pipeline {
+    agent {
         label 'jenkins_slave'
     }
-    tools{
+    tools {
         jdk 'jdk21'
         nodejs 'nodeJs'
     }
-    parameters{
-         string defaultValue: 'dev', description: 'Colocar un brach a deployar', name: 'BRANCH', trim: false
+    parameters {
+        string(defaultValue: 'dev', description: 'Colocar un brach a deployar', name: 'BRANCH', trim: false)
     }
-    environment{
-       VAR='NUEVO'
+    environment {
+        VAR = 'NUEVO'
     }
-    stages{
-        stage("create build name"){
-            steps{           
-                script{
-                   currentBuild.displayName= "service_back-"+ currentBuild.number
+    stages {
+        stage("create build name") {
+            steps {
+                script {
+                    currentBuild.displayName = "service_back-" + currentBuild.number
                 }
             }
         }
-        stage("Clean"){
-            steps{
+        stage("Clean") {
+            steps {
                 cleanWs()
             }
         }
-        stage("download proyect"){
-            steps{
-                git  credentialsId: 'git_credentials',branch: "${BRANCH}", url: "${url_repo}"
+        stage("download proyect") {
+            steps {
+                git credentialsId: 'git_credentials', branch: "${BRANCH}", url: "${url_repo}"
                 echo "proyecto ui descargado"
             }
         }
