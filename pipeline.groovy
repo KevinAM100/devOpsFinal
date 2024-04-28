@@ -76,6 +76,18 @@ pipeline {
             }
         
         }
+        stage('Build Docker Image') {
+            
+            steps {
+                sh "docker --version"
+                sh "pwd"
+                sh "docker build -t academy-mg-ui:1.0 ."
+                sh "docker tag academy-mg-ui:1.0 dafnec/academy-ui:1.0"
+                sh "docker login -u cruzdafne123@gmail.com -p 12937234dxca"
+                sh "docker push dafnec/academy-ui:1.0"
+                
+            }
+        }
        
     }
 }
